@@ -7,6 +7,9 @@
 ## 3. set the value of the mean
 ## 4. get the value of the mean
 
+## usage example:
+## > solvablematrix <- makeCachedMatrix() 
+
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
         set <- function(y) {
@@ -14,25 +17,26 @@ makeCacheMatrix <- function(x = matrix()) {
                 m <<- NULL
         }
         get <- function() x
-        setmatrix <- function(solve) m <<- solve
-        getmatrix <- function() m
+        setcachedmatrix <- function(solve) m <<- solve
+        getcachedmatrix <- function() m
         list(set = set, get = get,
-             setmatrix = setmatrix,
-             getmatrix = getmatrix)
+             setcachedmatrix = setcachedmatrix,
+             getcachedmatrix = getcachedmatrix)
 }
 
-
 ## cacheSolve to check if the inverted matrix already exists in the vector, if not, then solve() it to create the inversion
+## usage: first, create your matrix and assign it to 'solvablematrix' with > solvablematrix@set(matrix(...))
+## Then run it through: cacheSolve(solvablematrix)
 
-cacheSolve <- function(x, ...) {
+cacheSolve <- function(x=matrix(), ...) {
         ## Return a matrix that is the inverse of 'x'
-	m <- x$getmatrix()
+	      m <- x$getcachedmatrix()
         if(!is.null(m)) { # check the cached vector
-                message("getting cached data")
+                message("getting cached dat<a") # report to be displayed if cache is used
                 return(m)
         }
         data <- x$get()
         m <- solve(data, ...) # calculate the inversion
-        x$setmatrix(m)
+        x$setcachedmatrix(m) # store the inverted result into the cache
         m
 }
