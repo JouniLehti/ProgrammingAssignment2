@@ -32,7 +32,7 @@ cacheSolve <- function(x=matrix(), ...) {
         ## Return a matrix that is the inverse of 'x'
 	      m <- x$getcachedmatrix()
         if(!is.null(m)) { # check the cached vector
-                message("getting cached dat<a") # report to be displayed if cache is used
+                message("getting cached data") # report to be displayed if cache is used
                 return(m)
         }
         data <- x$get()
